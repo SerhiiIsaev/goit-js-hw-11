@@ -8,21 +8,58 @@
   padding: 16px;
 }
 
-.example code {
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: 700;
-  background-color: #ff6b0a;
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 2px;
+body{
+  font-size: 12px;
 }
 
+
+
 .header{
+  font-size: 14px;
   background-color: blue;
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: center;
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+.info-value{
+  color: blue;
+}
+
+.is-hidden{
+  display: none;
+}
+
+.load-more{
+  margin-left: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+
+}
+
+.info{
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-top: 80px;
+  padding-bottom: 10px;
+}
+
+.photo-card{
+  margin-left: 40px;
+}
+
 

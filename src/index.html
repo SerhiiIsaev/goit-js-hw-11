@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="./sass/index.scss" />
     
   </head>
+  <header class="header">
+    <form class="search-form" id="search-form">
+      <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+      <button class="searh-button" type="submit">Search</button>
+    </form>
+  </header>
   <body>
-    <header class="header">
-      <form class="search-form" id="search-form">
-        <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-        <button type="submit">Search</button>
-      </form>
-    </header>
     
-    <script type="module" src="./index.js"></script>
+    <div class="gallery"></div>
+    <button type="button" class="load-more is-hidden">Load more</button>
+    
   </body>
+  <script type="module" src="./index.js"></script>
 </html>
