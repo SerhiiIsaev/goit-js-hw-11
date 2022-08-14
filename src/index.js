@@ -12,14 +12,16 @@ const galleryEl = document.querySelector('.gallery')
 
 let searchName = ""
 let page = 1
-let total = 0
+let restPictures = 0
 let perPage = 40
 const simplelightbox = new SimpleLightbox('.gallery a');
+
+
 
 const onSerchBtn = async(e) => {
     e.preventDefault()
     page = 1
-    total = 0
+    restPictures = 0
     searchName = inputEl.value
     galleryEl.innerHTML = ""
     loadMoreBtnEl.classList.add('is-hidden')
@@ -27,9 +29,8 @@ const onSerchBtn = async(e) => {
         const response = await getData()
         const markup = await createMarkup(response);
         const massage = await makeInfoMassage(response)
-        total = await response.data.totalHits / perPage
+        restPictures = await response.data.totalHits - perPage
         simplelightbox.refresh()
-        
     } catch (err) {
         console.log('error')
     }
@@ -38,10 +39,11 @@ const onSerchBtn = async(e) => {
 
 const onLoadMoreBtn = async (e) =>{
     page += 1
-    if (page <= total){
+    if (restPictures > 0){
         const response = await getData()
         const markup = await createMarkup(response);
         simplelightbox.refresh()
+        restPictures -= perPage
     } else {
         Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
     }
@@ -49,8 +51,10 @@ const onLoadMoreBtn = async (e) =>{
 }
 
 function makeInfoMassage(response) {
-    if (searchName !== "") {
-        return Notiflix.Notify.info(`Hooray! We found ${response.data.totalHits} images.`)
+    if (response.data.hits.length && searchName) {
+        Notiflix.Notify.info(`Hooray! We found ${response.data.totalHits} images.`)
+    } else {
+        Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
     }
 }
 
@@ -68,7 +72,7 @@ function createMarkup(response) {
          
     if (searchName === "" || hits.length === 0) {
         loadMoreBtnEl.classList.add('is-hidden')
-        Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+        
     }
 }
 
